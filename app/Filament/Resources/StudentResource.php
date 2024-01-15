@@ -6,6 +6,8 @@ use App\Filament\Resources\StudentResource\Pages;
 use App\Filament\Resources\StudentResource\RelationManagers;
 use App\Models\Student;
 use Filament\Forms;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -24,7 +26,16 @@ class StudentResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Select::make('class_id')
+                    ->relationship(name: 'class',titleAttribute: 'name'),
+                // Select::make('section_id')
+                //     ->relationship(name: 'section',titleAttribute: 'name'),
+                TextInput::make('name')
+                    ->required()
+                    ->autofocus(),
+                TextInput::make('email')
+                    ->required()
+                    ->unique(),
             ]);
     }
 
